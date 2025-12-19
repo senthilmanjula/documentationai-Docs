@@ -3,10 +3,10 @@
   "initialRoute": "introduction",
   "colors": {
     "light": {
-      "brand": "#13539a"
+      "brand": "#004B96"
     },
     "dark": {
-      "brand": "#4e7eb3"
+      "brand": "#004B96"
     }
   },
   "navigation": {
