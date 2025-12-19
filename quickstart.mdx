@@ -1,0 +1,150 @@
+---
+title: Quickstart Guide
+description: Step-by-step instructions to set up your Fresa Technologies account and begin managing freight operations.
+---
+
+## Overview
+
+Get started with Fresa Technologies in minutes. This guide walks you through account creation, dashboard setup, company profile configuration, and your first AI-assisted freight quote. Fresa provides a unified platform for freight forwarding, handling quoting, documentation, shipments, and compliance with AI automation.
+
+<Callout kind="tip">
+  Prepare your company details like name, address, and freight licenses before starting.
+</Callout>
+
+## Complete Setup in 4 Steps
+
+Follow these steps to launch your freight operations platform.
+
+<Steps>
+  <Step title="Create Account" icon="user-plus">
+    Visit [app.fresa.tech](https://app.fresa.tech) and click **Sign Up**.
+
+    Fill in your email, create a strong password, and verify via the email link sent to you.
+
+    <Tabs>
+      <Tab title="Web" icon="globe">
+        Use your desktop browser for the full experience.
+      </Tab>
+      <Tab title="Mobile" icon="smartphone">
+        Download the Fresa app from App Store or Google Play after email verification.
+      </Tab>
+    </Tabs>
+  </Step>
+
+  <Step title="Log In and Dashboard Setup" icon="log-in">
+    Log in at [app.fresa.tech/login](https://app.fresa.tech/login).
+
+    On the dashboard, complete the onboarding wizard:
+    1. Select your primary region (e.g., North America).
+    2. Choose freight modes (air, sea, road).
+    3. Enable AI quoting.
+
+    <Image
+      src="https://via.placeholder.com/800x400/13539a/ffffff?text=Fresa+Dashboard"
+      alt="Fresa Technologies initial dashboard with onboarding wizard"
+      width="800"
+      height="400"
+    />
+  </Step>
+
+  <Step title="Configure Company Profile" icon="settings">
+    Navigate to **Settings > Company Profile**.
+
+    Enter details:
+
+    | Field          | Example Value                  | Required |
+    |----------------|--------------------------------|----------|
+    | Company Name   | Acme Freight Forwarders        | Yes     |
+    | Address        | 123 Shipping St, Miami, FL     | Yes     |
+    | Freight License| FL-FF-12345                    | Yes     |
+    | Currency       | USD                            | Yes     |
+    | Timezone       | America/New_York               | No      |
+
+    Save changes. AI compliance checks run automatically.
+  </Step>
+
+  <Step title="Create Your First AI Quote" icon="zap">
+    Go to **Quotes > New AI Quote**.
+
+    Input shipment details:
+    - Origin: Miami, FL
+    - Destination: Shanghai, CN
+    - Cargo: Electronics, 500kg
+    - Mode: Air
+
+    Click **Generate Quote**. AI analyzes rates, compliance, and suggests options.
+
+    Integrate via API for automation:
+
+    <CodeGroup tabs="JavaScript,Python">
+    ````javascript
+    const response = await fetch('https://api.fresa.tech/v1/quotes', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${YOUR_API_KEY}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        origin: 'Miami, FL',
+        destination: 'Shanghai, CN',
+        cargoWeight: 500,
+        mode: 'air'
+      })
+    });
+    const quote = await response.json();
+    console.log(quote.rates);
+    ````
+    ````python
+    import requests
+
+    headers = {
+        'Authorization': f'Bearer {YOUR_API_KEY}',
+        'Content-Type': 'application/json'
+    }
+    data = {
+        'origin': 'Miami, FL',
+        'destination': 'Shanghai, CN',
+        'cargoWeight': 500,
+        'mode': 'air'
+    }
+    response = requests.post('https://api.fresa.tech/v1/quotes', json=data, headers=headers)
+    quote = response.json()
+    print(quote['rates'])
+    ````
+    </CodeGroup>
+
+    Review and send to customer.
+  </Step>
+</Steps>
+
+## Next Steps
+
+Explore more features to scale your operations.
+
+<Columns cols={3}>
+  <Card title="Shipment Tracking" icon="map-pin" href="/docs/tracking">
+    Monitor real-time shipments with AI alerts.
+  </Card>
+  <Card title="Compliance Tools" icon="shield" href="/docs/compliance">
+    Automate documentation and regulations.
+  </Card>
+  <Card title="Integrations" icon="plug" href="/docs/integrations">
+    Connect with carriers and ERPs.
+  </Card>
+</Columns>
+
+## Frequently Asked Questions
+
+<ExpandableGroup>
+  <Expandable title="What if I encounter login issues?">
+    Reset your password via the forgot link. Ensure your email is verified. Contact support@fresa.tech if issues persist.
+  </Expandable>
+
+  <Expandable title="How secure is my data?">
+    Fresa uses AES-256 encryption and SOC 2 compliance. All data stays in your region.
+  </Expandable>
+</ExpandableGroup>
+
+<Callout kind="success">
+  Congratulations! You're ready to manage freight with AI-powered efficiency.
+</Callout>

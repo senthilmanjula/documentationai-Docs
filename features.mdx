@@ -1,0 +1,133 @@
+---
+title: Core Features
+description: Detailed explanation of the main functionalities in Fresa Technologies, focusing on AI-driven tools for efficiency.
+---
+
+## Overview
+
+Fresa Technologies empowers freight forwarders and shippers with AI-enabled tools to streamline operations. You manage quoting, documentation, compliance, and analytics from a single platform. These core features reduce manual work, minimize errors, and boost profitability.
+
+<Columns cols={2}>
+  <Card title="AI-Assisted Quoting" icon="zap" href="#ai-quoting">
+    Generate accurate quotes in seconds using AI that analyzes routes, rates, and market data.
+  </Card>
+  <Card title="Automated Documentation" icon="file-text" href="#documentation">
+    Create compliant bills of lading, AWBs, and invoices automatically.
+  </Card>
+  <Card title="Compliance Tools" icon="shield" href="#compliance">
+    Stay audit-ready with real-time regulatory checks and automated filings.
+  </Card>
+  <Card title="Analytics Dashboard" icon="bar-chart-3" href="#analytics">
+    Gain insights into shipments, costs, and performance with interactive reports.
+  </Card>
+</Columns>
+
+## AI-Assisted Quoting and Pricing
+
+Leverage AI to produce precise freight quotes instantly. Input shipment details like origin, destination, weight, and cargo type. The system cross-references carrier rates, fuel surcharges, and historical data for optimal pricing.
+
+<Callout kind="tip">
+  Enable dynamic pricing to adjust quotes based on real-time market fluctuations.
+</Callout>
+
+<Steps>
+  <Step title="Enter Shipment Details" icon="package">
+    Specify origin `New York, NY`, destination `Los Angeles, CA`, weight `150kg`, and cargo type `electronics`.
+  </Step>
+  <Step title="Review AI Quote" icon="check-circle">
+    AI suggests base rate `$250`, plus surcharges `$45`, total `$295`.
+  </Step>
+  <Step title="Send Quote" icon="send">
+    Email or share via portal with one click.
+  </Step>
+</Steps>
+
+Integrate via API for custom apps:
+
+<CodeGroup tabs="JavaScript,Python">
+  ```javascript
+  const response = await fetch('https://api.fresa.tech/v1/quotes', {
+    method: 'POST',
+    headers: { 'Authorization': 'Bearer YOUR_API_KEY', 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      origin: 'JFK',
+      destination: 'LAX',
+      weight: 150,
+      cargoType: 'electronics'
+    })
+  });
+  const quote = await response.json();
+  console.log(quote.total); // 295
+  ```
+  ```python
+  import requests
+  response = requests.post(
+      'https://api.fresa.tech/v1/quotes',
+      headers={'Authorization': 'Bearer YOUR_API_KEY', 'Content-Type': 'application/json'},
+      json={'origin': 'JFK', 'destination': 'LAX', 'weight': 150, 'cargoType': 'electronics'}
+  )
+  quote = response.json()
+  print(quote['total'])  # 295
+  ```
+</CodeGroup>
+
+## Automated Documentation Generation
+
+Generate shipping documents effortlessly. AI pulls data from quotes and bookings to create standardized forms, ensuring accuracy and saving hours per shipment.
+
+<Tabs>
+  <Tab title="Bill of Lading" icon="file">
+    Auto-populates shipper, consignee, and goods details.
+  </Tab>
+  <Tab title="Air Waybill (AWB)" icon="plane">
+    Handles IATA-compliant formats for air freight.
+  </Tab>
+  <Tab title="Commercial Invoice" icon="dollar-sign">
+    Calculates values and applies HS codes automatically.
+  </Tab>
+</Tabs>
+
+## Compliance and Regulatory Tools
+
+Maintain compliance across jurisdictions. Tools scan shipments for restrictions, generate required declarations, and track amendments.
+
+<Expandable title="Advanced Compliance Workflow" default-open="false">
+
+  ```mermaid
+  graph TD
+      A[New Shipment] --> B[AI Scan Regulations]
+      B --> C{Compliant?}
+      C -- Yes --> D[Generate Docs]
+      C -- No --> E[Flag Issues]
+      E --> F[Amend & Rescan]
+      F --> D
+      D --> G[Archive]
+  ```
+
+</Expandable>
+
+Use these API parameters for custom compliance checks:
+
+<ParamField path="shipmentId" param-type="string" required="true">
+  Unique shipment identifier.
+</ParamField>
+
+<ParamField query="country" param-type="string" required="false">
+  Target country for regulations (e.g., `US`).
+</ParamField>
+
+## Reporting and Analytics Dashboard
+
+Visualize your operations with customizable dashboards. Track KPIs like on-time delivery (>95%), cost per kg (`< $2.50`), and carrier performance.
+
+| Metric              | Target       | Current |
+|---------------------|--------------|---------|
+| On-Time Delivery    | `>95%`      | 97.2%  |
+| Avg Cost per kg     | `< $2.50`   | $2.15  |
+| Shipment Volume     | 500/mo      | 620/mo |
+
+<Callout kind="success">
+  Export reports in PDF or CSV for stakeholders.
+</Callout>
+
+These features integrate seamlessly, letting you scale operations without added headcount. Start with quoting to see immediate efficiency gains.

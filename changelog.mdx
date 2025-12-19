@@ -1,0 +1,153 @@
+---
+title: Changelog
+description: Version history and updates for Fresa Technologies, highlighting new features and improvements.
+---
+
+## Recent Releases
+
+Fresa Technologies releases updates regularly to enhance your freight management experience. Review the latest changes below to understand new capabilities, fixes, and required actions.
+
+<Update label="2024-10-15" description="v2.1.0" tags={["feature", "improvement"]}>
+
+## New Features
+
+- Added AI-assisted compliance checks for international shipments, automatically flagging regulatory issues during documentation.
+- Introduced real-time tracking integration with major carriers like Maersk and FedEx.
+
+## Improvements
+
+- Optimized quoting engine for `<50ms` response times on high-volume requests.
+- Enhanced dashboard with customizable widgets for shipment metrics.
+
+## Bug Fixes
+
+- Fixed intermittent failures in document generation for multi-leg shipments.
+- Resolved authentication issues with `{API_KEY}` rotation.
+
+</Update>
+
+<Update label="2024-09-20" description="v2.0.0" tags={["feature", "breaking"]}>
+
+## New Features
+
+- Launched unified dashboard for end-to-end freight operations, combining quoting, booking, and tracking.
+- Integrated AI quoting with dynamic pricing based on market rates and fuel surcharges.
+
+## Breaking Changes
+
+- Updated API endpoints: `/v1/quotes` now requires `shipmentType` parameter.
+- Deprecated legacy `/legacy/docs` endpoint in favor of `/v2/documents`.
+
+## Bug Fixes
+
+- Corrected rate calculation errors for air freight under 100kg.
+
+</Update>
+
+<Update label="2024-08-10" description="v1.5.0" tags={["bugfix", "improvement"]}>
+
+## Improvements
+
+- Improved mobile responsiveness for field agents accessing shipment status.
+- Added bulk import for shipment data via CSV with validation.
+
+## Bug Fixes
+
+- Patched security vulnerability in file upload for shipping documents (CVE-2024-5678).
+- Fixed sync issues between web and mobile apps.
+
+</Update>
+
+## Migration Guides
+
+Upgrade smoothly by following these version-specific steps. Test changes in staging before production.
+
+<Tabs>
+  <Tab title="v2.1.0 to v2.0.0" icon="arrow-up">
+
+<Steps>
+  <Step title="Update SDK" icon="download">
+
+Install the latest SDK:
+
+<CodeGroup tabs="npm,yarn">
+```bash
+npm install @fresa/freight-sdk@2.1.0
+```
+```bash
+yarn add @fresa/freight-sdk@2.1.0
+```
+</CodeGroup>
+
+  </Step>
+  <Step title="Refactor Quotes Endpoint" icon="code">
+
+Update your quoting calls:
+
+````javascript
+// Old
+const quote = await fetch('/v1/quotes', {
+  body: JSON.stringify({ origin: 'NYC', dest: 'LAX' })
+});
+
+// New
+const quote = await fetch('/v2/quotes', {
+  body: JSON.stringify({
+    origin: 'NYC',
+    dest: 'LAX',
+    shipmentType: 'air'  // Required now
+  })
+});
+````
+
+  </Step>
+  <Step title="Test Compliance Features" icon="shield">
+
+Run compliance checks:
+
+```javascript
+const compliance = await fresaSDK.checkCompliance({
+  shipmentId: 'SHIP123',
+  docs: documentData
+});
+```
+
+  </Step>
+</Steps>
+
+<Callout kind="tip">
+Backup your current configuration before migrating. Use the staging API at `https://staging.fresa.tech/api`.
+</Callout>
+
+  </Tab>
+  <Tab title="v2.0.0 to v1.5.0" icon="arrow-down">
+
+Review deprecated endpoints and enable bulk imports.
+
+  </Tab>
+</Tabs>
+
+## Upcoming Features
+
+Stay ahead with previews of what's next.
+
+<Columns cols={2}>
+  <Card title="AI Predictive Delays" icon="zap" href="/docs/ai-predictions">
+    Proactively reroute shipments based on weather and port congestion forecasts.
+  </Card>
+  <Card title="Blockchain Document Trail" icon="shield" href="/docs/blockchain">
+    Immutable audit logs for compliance reporting.
+  </Card>
+</Columns>
+
+<Expandable title="Migration Best Practices" default-open="false">
+
+- Always version-pin your SDK: `"@fresa/freight-sdk": "2.1.0"`.
+- Monitor webhook events for `compliance.updated` and `quote.revised`.
+- Contact support@fresa.tech for enterprise migrations.
+
+</Expandable>
+
+<Callout kind="info">
+Subscribe to release notifications via your account settings to get email alerts on new versions.
+</Callout>
